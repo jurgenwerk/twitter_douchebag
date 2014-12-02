@@ -28,21 +28,25 @@ module Clockwork
   class << self
 
     def follow(handle)
-      client = get_client
-      client.follow(handle.handle)
-      handle.followed = true
-      handle.followed_at = DateTime.current
-      handle.save
-      puts "followed #{handle.handle}"
+      if handle
+        client = get_client
+        client.follow(handle.handle)
+        handle.followed = true
+        handle.followed_at = DateTime.current
+        handle.save
+        puts "followed #{handle.handle}"
+      end
     end
 
     def unfollow(handle)
-      client = get_client
-      client.unfollow(handle.handle)
-      handle.unfollowed = true
-      handle.unfollowed_at = DateTime.current
-      handle.save
-      puts "unfollowed #{handle.handle}"
+      if handle
+        client = get_client
+        client.unfollow(handle.handle)
+        handle.unfollowed = true
+        handle.unfollowed_at = DateTime.current
+        handle.save
+        puts "unfollowed #{handle.handle}"
+      end
     end
 
     def get_client
