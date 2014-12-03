@@ -5,7 +5,7 @@ require 'twitter'
 
 module Clockwork
 
-  every(6.hours, "[#{DateTime.now.to_s}] Following a user") do
+  every(3.hours, "[#{DateTime.now.to_s}] Following a user") do
     begin
       handle = Handle.where(followed: false, unfollowed: false).sample
       follow(handle)
@@ -15,7 +15,7 @@ module Clockwork
     end
   end
 
-  every(3.hours, "[#{DateTime.now.to_s}] Unfollowing a user") do
+  every(30.minutes, "[#{DateTime.now.to_s}] Unfollowing a user") do
     begin
       handle = Handle.where(followed: true, unfollowed: false, :followed_at.lte => 3.days.ago).last
       unfollow(handle)
